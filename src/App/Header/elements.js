@@ -1,7 +1,8 @@
 import styled, { css } from "styled-components";
 import { UnordedList } from "../../App/components/elements";
 
-export const StyledHeader = styled.div`
+export const StyledHeader = styled.header`
+  position: relative;
   display: flex;
   height: 80px;
   align-items: stretch;
@@ -62,10 +63,15 @@ export const Navigation = styled.nav`
   display: flex;
   flex-grow: 1;
   padding: 0 30px 0 55px;
+  justify-content: space-between;
 `;
 
+// make absolute to ensure central position
 export const Logo = styled.span`
-  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
   font-size: 26px;
 `;
 

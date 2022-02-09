@@ -1,12 +1,15 @@
 import styled from "styled-components";
 
-export const SearchDetailsWrapper = styled.section`
-  min-height: 135px;
-  padding: 40px 60px;
+import { PageSection } from "../element";
+
+export const SearchDetailsSection = styled(PageSection)`
+  min-height: 136px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   display: flex;
   align-items: stretch;
   & > * {
-    flex: 1 1 0;
+    flex: 1 1 auto;
   }
 `;
 

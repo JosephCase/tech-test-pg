@@ -1,11 +1,13 @@
-import { PropertyDetailsWrapper } from "./elements";
+import { PropertyDetailsSection } from "./elements";
 import PropertyHeading from "./PropertyHeading";
+import PropertyImages from "./PropertyImages";
 
 const PropertyDetails = () => {
   return (
-    <PropertyDetailsWrapper>
+    <PropertyDetailsSection>
       <PropertyHeading />
-    </PropertyDetailsWrapper>
+      <PropertyImages />
+    </PropertyDetailsSection>
   );
 };
 
