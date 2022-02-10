@@ -1,13 +1,5 @@
 import styled, { css } from "styled-components";
-import { UnordedList } from "../../App/components/elements";
-
-export const StyledHeader = styled.header`
-  position: relative;
-  display: flex;
-  height: 80px;
-  align-items: stretch;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-`;
+import { breakpoint, faintBorder } from "../element";
 
 const HeaderBox = styled.button`
   width: 80px;
@@ -52,11 +44,14 @@ export const MainNavLink = styled(NavLink)`
 `;
 
 export const Menu = styled(HeaderBox)`
-  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  border-right: ${faintBorder};
 `;
 
 export const Search = styled(HeaderBox)`
-  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  border-left: ${faintBorder};
+  @media (max-width: ${breakpoint}) {
+    display: none;
+  }
 `;
 
 export const Navigation = styled.nav`
@@ -75,9 +70,41 @@ export const Logo = styled.span`
   font-size: 26px;
 `;
 
-export const NavigationLeft = styled(UnordedList)`
+export const NavigationLeft = styled.ul`
   display: flex;
 `;
-export const NavigationRight = styled(UnordedList)`
+export const NavigationRight = styled.ul`
   display: flex;
+`;
+
+//  outermost element
+export const StyledHeader = styled.header`
+  position: relative;
+  display: flex;
+  height: 80px;
+  align-items: stretch;
+  border-bottom: ${faintBorder};
+
+  // in the end I decided to delegate the breakpoint logic to the parent element
+  // this way all breakpoint related stylings can be seen in one place
+  // and imagining a case where the smaller components were shared between other views in the app
+  // the breakpoints is a layout consideration, not a consideration of an individual element
+
+  @media (max-width: ${breakpoint}) {
+    ${Navigation} {
+      justify-content: flex-end;
+    }
+    // hide the navigation in the navbar,
+    // in a full working example it would
+    // be moved to the menu
+    ${NavLink}, ${Search} {
+      display: none;
+    }
+    ${Logo} {
+      position: static;
+      display: flex;
+      align-items: center;
+      transform: unset;
+    }
+  }
 `;

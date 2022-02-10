@@ -1,17 +1,6 @@
 import styled from "styled-components";
 
-import { PageSection } from "../element";
-
-export const SearchDetailsSection = styled(PageSection)`
-  min-height: 136px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  display: flex;
-  align-items: stretch;
-  & > * {
-    flex: 1 1 auto;
-  }
-`;
+import { breakpoint, PageSection, faintBorder } from "../element";
 
 export const SearchDetailWrapper = styled.div`
   display: flex;
@@ -20,7 +9,7 @@ export const SearchDetailWrapper = styled.div`
   padding: 6px 25px 6px 0;
   cursor: ${({ clickable }) => (clickable ? "pointer" : "default")};
   & + & {
-    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    border-left: ${faintBorder};
     padding-left: 25px;
   }
 `;
@@ -39,6 +28,34 @@ export const DetailArrow = styled.span`
 
 export const BookButton = styled.button`
   width: 230px;
+  height: 56px;
   flex: 0 0 auto;
   background: #fdbc2b;
+`;
+
+// outer element
+export const SearchDetailsSection = styled(PageSection)`
+  min-height: 136px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  display: flex;
+  align-items: stretch;
+  & > * {
+    flex: 1 1 auto;
+  }
+
+  @media (max-width: ${breakpoint}) {
+    flex-direction: column;
+    ${SearchDetailWrapper} {
+      padding: 6px 6px 12px;
+    }
+    ${SearchDetailWrapper} + ${SearchDetailWrapper} {
+      border-left: none;
+      border-top: ${faintBorder};
+    }
+    ${BookButton} {
+      width: unset;
+      margin-top: 12px;
+    }
+  }
 `;

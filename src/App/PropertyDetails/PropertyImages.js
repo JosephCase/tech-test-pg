@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 
 import {
+  ImageWrapper,
   ImageFrame,
   ImageSlider,
   LeftArrow,
@@ -54,27 +55,35 @@ const PropertyImages = () => {
   };
 
   return (
-    <ImageFrame ref={frameRef}>
-      <ImageSlider numberOfImages={numberOfImages} visibleIndex={visibleIndex}>
-        {images.map((img, i) => (
-          <PropertyImage
-            key={i}
-            src={`${img}?w=${frameWidth}`}
-            numberOfImages={numberOfImages}
-          />
-        ))}
-      </ImageSlider>
-      {visibleIndex > 0 && (
-        <LeftArrow onClick={handleCarouselLeft}>LEFT</LeftArrow>
-      )}
+    <ImageWrapper>
+      <ImageFrame ref={frameRef}>
+        <ImageSlider
+          numberOfImages={numberOfImages}
+          visibleIndex={visibleIndex}
+        >
+          {images.map((img, i) => (
+            <PropertyImage
+              key={i}
+              src={`${img}?w=${frameWidth}`}
+              numberOfImages={numberOfImages}
+            />
+          ))}
+        </ImageSlider>
+        <ImageCounter>
+          {visibleIndex + 1}/{numberOfImages}
+        </ImageCounter>
+      </ImageFrame>
+      {visibleIndex > 0 && <LeftArrow onClick={handleCarouselLeft} />}
       {visibleIndex < numberOfImages - 1 && (
-        <RightArrow onClick={handleCarouselRight}>RIGHT</RightArrow>
+        <RightArrow onClick={handleCarouselRight} />
       )}
-      <ImageCounter>
-        {visibleIndex + 1}/{numberOfImages}
-      </ImageCounter>
-    </ImageFrame>
+    </ImageWrapper>
   );
 };
 
 export default PropertyImages;
+
+// could potentially split the business logic of the carousel component
+// and the image fetching, to make them re-usable
+// generally I wouldn't do it unless I knew in the future I would need another carousel,
+// so it's hard to make the decision in the context of this exercise

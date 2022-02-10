@@ -1,4 +1,5 @@
 import React from "react";
+import { FiSearch, FiMenu } from 'react-icons/fi';
 import {
   StyledHeader,
   NavLink,
@@ -14,7 +15,7 @@ import {
 const Header = () => {
   return (
     <StyledHeader>
-      <Menu>MENU</Menu>
+      <Menu><FiMenu /></Menu>
       <Navigation>
         {/* could split these into sub components, but as there is no business logic it's okay like this */}
         <NavigationLeft>
@@ -35,7 +36,7 @@ const Header = () => {
           </NavLink>
         </NavigationRight>
       </Navigation>
-      <Search>Search</Search>
+      <Search><FiSearch /></Search>
     </StyledHeader>
   );
 };

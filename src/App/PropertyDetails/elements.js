@@ -1,14 +1,6 @@
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import styled from "styled-components";
-import { faintBorder } from "../elementConst";
-import { PageSection } from "../element";
-
-export const PropertyDetailsSection = styled(PageSection)`
-  // avoid using 2-elements, to create 2 colour background,
-  // they can be difficult cross-browser, especially when they are used as containers
-  background: #f5ded2; // older browsers
-  background-image: linear-gradient(#f5ded2 90%, #fff 90%);
-  padding-bottom: 35px;
-`;
+import { breakpoint, faintBorder, PageSection } from "../element";
 
 export const PropertyHeadingWrapper = styled.div`
   display: flex;
@@ -17,6 +9,7 @@ export const PropertyHeadingWrapper = styled.div`
 `;
 
 export const PropertyName = styled.h3`
+  text-align: center;
   font-size: 50px;
   margin-top: 80px;
 `;
@@ -44,14 +37,32 @@ export const PropertyLogistics = styled.ul`
 `;
 
 export const Logistic = styled.li`
+  display: flex;
+  align-items: center;
   & + & {
     border-left: ${faintBorder};
   }
+  svg {
+    margin-right: 6px;
+  }
+`;
+
+// Could potentially split into two element files
+//  - PropertyDetails
+//    \_index.js
+//    \_element.js
+//  - PropertyImages
+//    \_index.js
+//    \_element.js
+// kind of on the limit, but given the project size
+// I feel its better to do like this to keep consistent with the other sections
+
+export const ImageWrapper = styled.div`
+  margin-top: 60px;
+  position: relative;
 `;
 
 export const ImageFrame = styled.div`
-  margin-top: 60px;
-  position: relative;
   overflow: hidden;
 `;
 
@@ -74,21 +85,25 @@ export const PropertyImage = styled.img`
   width: ${({ numberOfImages }) => 100 / numberOfImages}%;
 `;
 
-const Arrow = styled.button`
+const ArrowStyling = `
   position: absolute;
-  background: white;
   top: 50%;
-  transform: translateY(-50%);
   cursor: pointer;
-  padding: 6px;
-`;
+  width: 50px;
+  height: auto;
+  height: auto;
+  `;
 
-export const LeftArrow = styled(Arrow)`
+export const LeftArrow = styled(BsArrowLeft)`
+  ${ArrowStyling}
   left: 0;
+  transform: translateY(-50%) translateX(-50%);
 `;
 
-export const RightArrow = styled(Arrow)`
+export const RightArrow = styled(BsArrowRight)`
+  ${ArrowStyling}
   right: 0;
+  transform: translateY(-50%) translateX(50%);
 `;
 
 export const ImageCounter = styled.p`
@@ -105,4 +120,43 @@ export const ImageCounter = styled.p`
   background: white;
   text-align: center;
   font-size: 14px;
+`;
+
+// outer element
+export const PropertyDetailsSection = styled(PageSection)`
+  // avoid using 2-elements divs to create 2 colour background,
+  background: #f5ded2; // older browsers
+  background-image: linear-gradient(#f5ded2 90%, #fff 90%);
+  padding-bottom: 35px;
+
+  @media (max-width: ${breakpoint}) {
+    ${PropertyHeadingWrapper} {
+      align-items: stretch;
+    }
+    ${PropertyDetails} {
+      flex-direction: column;
+      align-items: flex-start;
+      ${Detail} {
+        margin: 0 6px 12px;
+      }
+    }
+    ${PropertyLogistics} {
+      margin-top: 0;
+      flex-direction: column;
+      ${Logistic} {
+        border: none;
+        padding: 0;
+        margin: 6px 0;
+      }
+    }
+    ${LeftArrow}, ${RightArrow} {
+      width: 30px;
+    }
+    ${ImageCounter} {
+      right: 0;
+      bottom: 0;
+      top: unset;
+      transform: translateX(50%) translateY(50%);
+    }
+  }
 `;

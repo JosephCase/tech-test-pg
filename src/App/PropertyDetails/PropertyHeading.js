@@ -7,6 +7,10 @@ import {
   Logistic,
 } from "./elements";
 
+import { FiMapPin } from "react-icons/fi";
+import { BiTrain } from "react-icons/bi";
+import { GiStairs } from "react-icons/gi";
+
 const PropertyHeading = () => (
   <PropertyHeadingWrapper>
     <PropertyName>Monsieur Didot</PropertyName>
@@ -18,9 +22,18 @@ const PropertyHeading = () => (
       <Detail>Peaceful</Detail>
     </PropertyDetails>
     <PropertyLogistics>
-      <Logistic>Notting Hill, London</Logistic>
-      <Logistic>Walk 6 mins (Westbourne Park Station)</Logistic>
-      <Logistic>Stairs</Logistic>
+      <Logistic>
+        <FiMapPin />
+        Notting Hill, London
+      </Logistic>
+      <Logistic>
+        <BiTrain />
+        Walk 6 mins (Westbourne Park Station)
+      </Logistic>
+      <Logistic>
+        <GiStairs />
+        Stairs
+      </Logistic>
     </PropertyLogistics>
   </PropertyHeadingWrapper>
 );
